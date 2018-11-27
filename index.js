@@ -5,7 +5,7 @@ var mqtt    = require('mqtt');
 module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
-	homebridge.registerAccessory("homebridge-mqtt-433-sensor", "mqtt-433-sensor", RfSensorAccessory);
+	homebridge.registerAccessory("homebridge-mqtt-sonoffrf-receiver", "mqtt-sonoffrf-receiver", RfSensorAccessory);
 }
 
 function RfSensorAccessory(log, config) {
@@ -21,7 +21,7 @@ function RfSensorAccessory(log, config) {
 	this.ondelay = config['ondelay'] || 10000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
-	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' ||'ContactSensor';
+	this.accessoryservicetype = config['accessoryservicetype'] || 'ContactSensor';
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
@@ -45,16 +45,10 @@ function RfSensorAccessory(log, config) {
 	};
 
 	switch (this.accessoryservicetype) {
-	case 'MotionSensor':
-		this.service = new Service.MotionSensor();
-		break;
 	case 'ContactSensor':
 		this.service = new Service.ContactSensor();
 		break;
-	case 'StatelessProgrammableSwitch':
-		this.service = new Service.StatelessProgrammableSwitch();
-		this.service.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setProps({ maxValue: 0 });
-		break;
+	
 	}
 
 	this.client  = mqtt.connect(this.url, this.options);
@@ -72,17 +66,7 @@ function RfSensorAccessory(log, config) {
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
 			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
 			switch (self.accessoryservicetype) {
-			case 'MotionSensor':
-				if (sensoractive) {
-					clearTimeout(timeout);
-					self.value = Boolean('true');
-					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}
-				self.value = Boolean(0);
-				timeout = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
-				break;
+		
 			case 'ContactSensor':
 				if (sensoractive) {
 					self.value = Boolean('true');
@@ -90,24 +74,17 @@ function RfSensorAccessory(log, config) {
 				}
 				self.value = Boolean(0);
 				
-				break;
-			case 'StatelessProgrammableSwitch':
-				if (sensoractive) {
-					self.service.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setValue(0);
-				}
-				break;
+			
 			}
 		}
 		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
 		if (sensoron) {
-			self.value = Boolean('true');
-			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			self.value = Boolean('true');		
 			self.service.getCharacteristic(Characteristic.ContactSensor).setValue(self.value);
 		}
 		var sensoroff = Boolean(self.rfcodeoff == rfreceiveddata);
 		if (sensoroff) {
-			self.value = Boolean(0);
-			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			self.value = Boolean(0);	
 			self.service.getCharacteristic(Characteristic.ContactSensor).setValue(self.value);
 		}
 	});
