@@ -96,16 +96,15 @@ RfSensorAccessory.prototype.getState = function(callback) {
 		callback(null, this.value);
 }
 
-
-
 RfSensorAccessory.prototype.getServices = function() {
-  var informationService = new Service.AccessoryInformation();
 
-  informationService
-    	.setCharacteristic(Characteristic.Name, this.name)
-  	.setCharacteristic(Characteristic.Manufacturer, "Sonoff111")
-	.setCharacteristic(Characteristic.Model, "RF Bridge 433 dudek")
-    	.setCharacteristic(Characteristic.SerialNumber, this.serialNumberMAC);
+	var informationService = new Service.AccessoryInformation();
 
-  return [informationService, this.service];
+	informationService
+		.setCharacteristic(Characteristic.Name, this.name)
+		.setCharacteristic(Characteristic.Manufacturer, "Sonoff")
+		.setCharacteristic(Characteristic.Model, "RF Bridge 433")
+		.setCharacteristic(Characteristic.SerialNumber, this.sn);
+
+	return [informationService, this.service];
 }
