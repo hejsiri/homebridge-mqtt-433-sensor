@@ -1,3 +1,4 @@
+
 var Service, Characteristic;
 var mqtt    = require('mqtt');
 
@@ -20,7 +21,7 @@ function RfSensorAccessory(log, config) {
 	this.ondelay = config['ondelay'] || 10000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
-	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor';
+	this.accessoryservicetype = config['accessoryservicetype'] || 'contactSensor';
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
@@ -44,8 +45,8 @@ function RfSensorAccessory(log, config) {
 	};
 
 	switch (this.accessoryservicetype) {
-	case 'MotionSensor':
-		this.service = new Service.MotionSensor();
+	case 'contactSensor':
+		this.service = new Service.contactSensor();
 		break;
 	case 'StatelessProgrammableSwitch':
 		this.service = new Service.StatelessProgrammableSwitch();
@@ -68,15 +69,15 @@ function RfSensorAccessory(log, config) {
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
 			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
 			switch (self.accessoryservicetype) {
-			case 'MotionSensor':
+			case 'contactSensor':
 				if (sensoractive) {
 					clearTimeout(timeout);
 					self.value = Boolean('true');
-					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 				}
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 				}.bind(self), self.ondelay);
 				break;
 			case 'StatelessProgrammableSwitch':
@@ -89,12 +90,12 @@ function RfSensorAccessory(log, config) {
 		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
 		if (sensoron) {
 			self.value = Boolean('true');
-			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 		}
 		var sensoroff = Boolean(self.rfcodeoff == rfreceiveddata);
 		if (sensoroff) {
 			self.value = Boolean(0);
-			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 		}
 	});
 
@@ -117,4 +118,3 @@ RfSensorAccessory.prototype.getServices = function() {
 
 	return [informationService, this.service];
 }
-
