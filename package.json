@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-mqtt-sonoffrf-receiver",
+  "name": "homebridge-mqtt-433-sensor",
   "version": "0.1.5",
   "description": "A HomeBridge plugin for MQTT motion sensors.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/miskui/homebridge-mqtt-sonoffrf-receiver.git"
+    "url": "git+https://github.com/mientki/homebridge-mqtt-433-sensor.git"
   },
   "files": [
     "index.js",
@@ -25,9 +25,9 @@
   "author": "Istvan Misku <istvan.misku@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/miskui/homebridge-mqtt-sonoffrf-receiver/issues"
+    "url": "https://github.com/mientki/homebridge-mqtt-433-sensor/issues"
   },
-  "homepage": "https://github.com/miskui/homebridge-mqtt-sonoffrf-receiver",
+  "homepage": "https://github.com/mientki/homebridge-mqtt-433-sensor",
   "dependencies": {
     "mqtt": "^1.12.0"
   },
