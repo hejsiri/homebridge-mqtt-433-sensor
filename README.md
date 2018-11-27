@@ -1,4 +1,4 @@
-# homebridge-mqtt-sonoffrf-receiver
+# homebridge-mqtt-433-sensor
 
 Get Motion Sensor status via MQTT in Homebridge using [Sonoff RF Bridge 433](https://www.itead.cc/sonoff-rf-bridge-433.html) with [TasmOTA firmware](https://github.com/arendst/Sonoff-Tasmota/wiki).
 Motion sensor is activated when received RF code matches for rfcode or RF key stored in Sonoff RF Bridge. Open Sonoff RF Bridge console to read out received RF codes as hexadecimal values in DATA field. Use these values in rfcode parameter or use rfkey if you have already defined RF codes in Sonoff RF Bridge. Value 'any' will activate the sensor if any RF code received. Use rfcodeon and rfcodeoff parameters if your sensor sends both on and off states.
@@ -34,7 +34,7 @@ Sample HomeBridge Configuration
           "ondelay": "time in ms while the sensor is active, the default is 10000",
           "rfcodeon": "1..7FFFFF",
           "rfcodeoff": "1..7FFFFF",
-          "accessoryservicetype": "'MotionSensor' (default) or 'StatelessProgrammableSwitch'"
+          "accessoryservicetype": "'MotionSensor' (default) or 'StatelessProgrammableSwitch' or 'ContactSensor'"
         }
       ],
 
