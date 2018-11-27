@@ -4,7 +4,7 @@ This plugin is based on [homebridge-mqtt-sonoffrf-receiver](https://github.com/m
 
 Get Motion Sensor status via MQTT in Homebridge using [Sonoff RF Bridge 433](https://www.itead.cc/sonoff-rf-bridge-433.html) with [TasmOTA firmware](https://github.com/arendst/Sonoff-Tasmota/wiki).
 Motion sensor is activated when received RF code matches for rfcode or RF key stored in Sonoff RF Bridge. Open Sonoff RF Bridge console to read out received RF codes as hexadecimal values in DATA field. Use these values in rfcode parameter or use rfkey if you have already defined RF codes in Sonoff RF Bridge. Value 'any' will activate the sensor if any RF code received. Use rfcodeon and rfcodeoff parameters if your sensor sends both on and off states.
-Sensor can be [motion sensor](https://www.itead.cc/sonoff-rf-bridge-433.html) or [RF button](https://www.aliexpress.com/item/86-Wall-Panel-Wireless-Remote-Transmitter-1-2-3-Channel-Sticky-RF-TX-Smart-For-Home/32793117889.html?spm=a2g0s.9042311.0.0.nUq3pZ) or any other RF sensor.
+Sensor can be [motion sensor](https://www.itead.cc/sonoff-rf-bridge-433.html), [RF button](https://www.aliexpress.com/item/86-Wall-Panel-Wireless-Remote-Transmitter-1-2-3-Channel-Sticky-RF-TX-Smart-For-Home/32793117889.html?spm=a2g0s.9042311.0.0.nUq3pZ), [Contac sensor](https://www.aliexpress.com/item/SECRUI-D026-Window-Door-Magnet-Sensor-Detector-Portable-Alarm-Sensors-Smart-Home-Detectors-Wireless-For-SECRUI/32891067687.html) or any other RF sensor.
 
 Installation
 --------------------
