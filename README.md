@@ -8,14 +8,15 @@ Sensor can be [motion sensor](https://www.itead.cc/sonoff-rf-bridge-433.html) or
 
 Installation
 --------------------
-    sudo npm install -g homebridge-mqtt-433-sensor
+     git clone https://github.com/mientki/homebridge-mqtt-433-sensor.git
+     npm install -g ./homebridge-mqtt-433-sensor
 
 
 Sample HomeBridge Configuration
 --------------------
     {
       "bridge": {
-        "name": "HomeBridge",
+        "name"sudo: "HomeBridge",
         "username": "CC:33:3B:D3:CE:32",
         "port": 51826,
         "pin": "321-45-123"
