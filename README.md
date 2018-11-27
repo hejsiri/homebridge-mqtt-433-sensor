@@ -32,7 +32,7 @@ Sample HomeBridge Configuration
       "accessories": [
         {
           "accessory": "mqtt-433-sensor",
-          "name": "Living Room",
+          "name": "Sensor 1",
           "url": "mqtt://localhost",
           "topic": "tele/sonoff_rf/RESULT",
           "username": "username",
