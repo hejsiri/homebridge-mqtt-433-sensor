@@ -5,7 +5,7 @@ var mqtt    = require('mqtt');
 module.exports = function(homebridge) {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
-	homebridge.registerAccessory("homebridge-mqtt-sonoffrf-receiver", "mqtt-sonoffrf-receiver", RfSensorAccessory); 
+	homebridge.registerAccessory("homebridge-mqtt-433-sensor", "mqtt-433-sensor", RfSensorAccessory); 
 }
 
 function RfSensorAccessory(log, config) {
