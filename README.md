@@ -8,14 +8,7 @@ Sensor can be [motion sensor](https://www.itead.cc/sonoff-rf-bridge-433.html), [
 
 Installation
 --------------------
-     git clone https://github.com/mientki/homebridge-mqtt-433-sensor.git
-     npm install -g ./homebridge-mqtt-433-sensor
-
-Update
---------------------
-     rm -rf homebridge-mqtt-433-sensor
-     git clone https://github.com/mientki/homebridge-mqtt-433-sensor.git
-     npm install -g ./homebridge-mqtt-433-sensor
+     npm install -g https://github.com/mientki/homebridge-mqtt-433-sensor.git
 
 Sample HomeBridge Configuration
 --------------------
