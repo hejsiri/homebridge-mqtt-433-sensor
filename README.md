@@ -33,6 +33,7 @@ Sample HomeBridge Configuration
           "rfcode": "1..7FFFFF or 'any'",
           "rfkey": "1..16 or 'any'",
           "ondelay": "time in ms while the sensor is active, the default is 10000",
+          
           "rfcodeon": "1..7FFFFF",
           "rfcodeoff": "1..7FFFFF",
           "accessoryservicetype": "'MotionSensor' (default) or 'StatelessProgrammableSwitch' or 'ContactSensor'"
