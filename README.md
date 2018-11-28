@@ -7,11 +7,11 @@ Motion sensor is activated when received RF code matches for rfcode or RF key st
 Sensor can be [motion sensor](https://www.itead.cc/sonoff-rf-bridge-433.html), [RF button](https://www.aliexpress.com/item/86-Wall-Panel-Wireless-Remote-Transmitter-1-2-3-Channel-Sticky-RF-TX-Smart-For-Home/32793117889.html?spm=a2g0s.9042311.0.0.nUq3pZ), [Contact sensor](https://www.aliexpress.com/item/SECRUI-D026-Window-Door-Magnet-Sensor-Detector-Portable-Alarm-Sensors-Smart-Home-Detectors-Wireless-For-SECRUI/32891067687.html) or any other RF sensor.
 
 
-Added
+Added support
 --------------------
-contact sensor support
-tempered status support 
-support for low battery status
+- contact sensor
+- tampered status
+- low battery status
 
 Installation
 --------------------
