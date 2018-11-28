@@ -9,9 +9,9 @@ Sensor can be [motion sensor](https://www.itead.cc/sonoff-rf-bridge-433.html), [
 
 Added
 --------------------
-     contact sensor support
-     Tempered status support
-     support for low battery status
+contact sensor support
+tempered status support 
+support for low battery status
 
 Installation
 --------------------
@@ -49,6 +49,3 @@ Sample HomeBridge Configuration
 
       "platforms": []
     }
-
-# References
-
