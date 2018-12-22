@@ -21,7 +21,7 @@ function RfSensorAccessory(log, config) {
 	this.ondelay = config['ondelay'] || 10000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
-	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' ||'ContactSensor';
+	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' || 'ContactSensor';
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
