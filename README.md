@@ -20,13 +20,12 @@ Sample HomeBridge Configuration
           "topic": "tele/sonoff_rf/RESULT",
           "username": "username",
           "password": "password",
-          "rfcode": "1..7FFFFF or 'any'",
-          "rfkey": "1..16 or 'any'",
-          "ondelay": "time in ms while the sensor is active, the default is 10000",
-          
-          "rfcodeon": "1..7FFFFF",
-          "rfcodeoff": "1..7FFFFF",
-          "accessoryservicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor"
+          "rfcode": "7FFFFF" or "any",
+          "rfkey": "1..16" or "any",
+          "ondelay": "10000", (time in ms while the sensor is active, the default is 10000)
+          "rfcodeon": "7FFFFF",
+          "rfcodeoff": "8FFFFF",
+          "accessoryser1vicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor"
         }
 
 Release notes
