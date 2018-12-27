@@ -12,17 +12,7 @@ Installation
 
 Sample HomeBridge Configuration
 --------------------
-    {
-      "bridge": {
-        "name"sudo: "HomeBridge",
-        "username": "CC:33:3B:D3:CE:32",
-        "port": 51826,
-        "pin": "321-45-123"
-      },
 
-      "description": "",
-
-      "accessories": [
         {
           "accessory": "mqtt-433-sensor",
           "name": "Sensor 1",
@@ -36,12 +26,8 @@ Sample HomeBridge Configuration
           
           "rfcodeon": "1..7FFFFF",
           "rfcodeoff": "1..7FFFFF",
-          "accessoryservicetype": "'MotionSensor' (default) or 'StatelessProgrammableSwitch' or 'ContactSensor'"
+          "accessoryservicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor"
         }
-      ],
-
-      "platforms": []
-    }
 
 Release notes
 --------------------
