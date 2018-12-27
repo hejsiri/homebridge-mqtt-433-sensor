@@ -25,7 +25,7 @@ Sample HomeBridge Configuration
           "ondelay": "10000", (time in ms while the sensor is active, the default is 10000)
           "rfcodeon": "7FFFFF",
           "rfcodeoff": "8FFFFF",
-          "accessoryser1vicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor"
+          "accessoryservicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor"
         }
 
 Release notes
