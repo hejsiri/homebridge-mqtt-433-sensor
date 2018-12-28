@@ -108,10 +108,14 @@ function RfSensorAccessory(log, config) {
 				break;
 			case 'SmokeSensor':
 				if (sensoractive) {
+					clearTimeout(timeout);
 					self.value = Boolean('true');
-					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+					self.service.getCharacteristic(Characteristic.SmokeSensor).setValue(self.value);
 				}
 				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.SmokeSensor).setValue(self.value);
+				}.bind(self), self.ondelay);
 				break;
 			case 'StatelessProgrammableSwitch':
 				if (sensoractive) {
