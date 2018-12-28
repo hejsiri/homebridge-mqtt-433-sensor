@@ -1,4 +1,3 @@
-
 var Service, Characteristic;
 var mqtt    = require('mqtt');
 
@@ -15,13 +14,13 @@ function RfSensorAccessory(log, config) {
 	this.name = config["name"];
 	this.url = config['url'];
 	this.topic = config['topic'];
-	this.sn = config['sn'] || 'Unknown';
+  	this.serialNumberMAC = config['serialNumberMAC'] || "";
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
 	this.ondelay = config['ondelay'] || 10000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
-	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' || 'ContactSensor';
+	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' ||'ContactSensor';
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
@@ -126,8 +125,8 @@ RfSensorAccessory.prototype.getServices = function() {
 	informationService
 		.setCharacteristic(Characteristic.Name, this.name)
 		.setCharacteristic(Characteristic.Manufacturer, "Sonoff")
-		.setCharacteristic(Characteristic.Model, "RF Bridge 433")
-		.setCharacteristic(Characteristic.SerialNumber, this.sn);
+		.setCharacteristic(Characteristic.Model, "RF Bridge 433000")
+    	.setCharacteristic(Characteristic.SerialNumber, this.serialNumberMAC);
 
 	return [informationService, this.service];
 }
