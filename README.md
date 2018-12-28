@@ -45,5 +45,3 @@ Version 0.1.7
 
 Version 0.1.6
 - added contact sensor
-- added tampered status (not yet)
-- added low battery status (not yet)
