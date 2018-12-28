@@ -53,6 +53,9 @@ function RfSensorAccessory(log, config) {
 	case 'SmokeSensor':
 		this.service = new Service.SmokeSensor();
 		break;
+	case 'LeakSensor':
+		this.service = new Service.LeakSensor();
+		break;
 	case 'StatelessProgrammableSwitch':
 		this.service = new Service.StatelessProgrammableSwitch();
 		this.service.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setProps({ maxValue: 0 });
@@ -85,10 +88,22 @@ function RfSensorAccessory(log, config) {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
 				break;
+				
+				
 			case 'ContactSensor':
 				if (sensoractive) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+				}
+				self.value = Boolean(0);
+				
+				break;
+				
+				
+			case 'LeakSensor':
+				if (sensoractive) {
+					self.value = Boolean('true');
+					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}
 				self.value = Boolean(0);
 				
