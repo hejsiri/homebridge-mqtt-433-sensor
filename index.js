@@ -140,6 +140,10 @@ function RfSensorAccessory(log, config) {
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 		}
+		var bateria = Boolean(self.rfcodelowbaterry == rfreceiveddata);
+		if (bateria){
+		self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+		}
 	});
 
 }
