@@ -160,7 +160,7 @@ RfSensorAccessory.prototype.getServices = function() {
 	informationService
 		.setCharacteristic(Characteristic.Name, this.name)
 		.setCharacteristic(Characteristic.Manufacturer, "Sonoff")
-		.setCharacteristic(Characteristic.Model, "RF Bridge 433000")
+		.setCharacteristic(Characteristic.Model, "RF Bridge 433")
     	.setCharacteristic(Characteristic.SerialNumber, this.serialNumberMAC);
 
 	return [informationService, this.service];
