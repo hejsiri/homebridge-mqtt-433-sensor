@@ -88,25 +88,23 @@ function RfSensorAccessory(log, config) {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
 				break;
-				
-				
 			case 'ContactSensor':
 				if (sensoractive) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 				}
 				self.value = Boolean(0);
-				
 				break;
-				
-				
 			case 'LeakSensor':
 				if (sensoractive) {
+					clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}
 				self.value = Boolean(0);
-				
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
 				break;
 			case 'SmokeSensor':
 				if (sensoractive) {
@@ -114,7 +112,6 @@ function RfSensorAccessory(log, config) {
 					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				}
 				self.value = Boolean(0);
-				
 				break;
 			case 'StatelessProgrammableSwitch':
 				if (sensoractive) {
