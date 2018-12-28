@@ -25,11 +25,24 @@ Sample HomeBridge Configuration
           "ondelay": "10000", (time in ms while the sensor is active, the default is 10000)
           "rfcodeon": "7FFFFF",
           "rfcodeoff": "8FFFFF",
-          "accessoryservicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor"
+          "accessoryservicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor" or "SmokeSensor" or "LeakSensor"
         }
+
+Supported sensors (accessory service type)
+--------------------
+- Motion sensor
+- Contact sensor (windows, doors, contact sensor, blinds, opening garage door)
+- Smoke sensor
+- Leak sensor
+- Stateless programmable switch
 
 Release notes
 --------------------
+Version 0.1.7
+- bugs fixed
+- added smoke sensor
+- added leak sensor
+
 Version 0.1.6
 - added contact sensor
 - added tampered status (not yet)
