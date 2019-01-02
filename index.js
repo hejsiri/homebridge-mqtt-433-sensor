@@ -52,6 +52,7 @@ function RfSensorAccessory(log, config) {
 		break;
 	case 'SmokeSensor':
 		this.service = new Service.SmokeSensor();
+		this.service.getCharacteristic(Characteristic.StatusLowBattery);
 		break;
 	case 'LeakSensor':
 		this.service = new Service.LeakSensor();
