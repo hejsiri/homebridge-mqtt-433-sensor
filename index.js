@@ -127,19 +127,48 @@ function RfSensorAccessory(log, config) {
 		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
 		if (sensoron) {
 			self.value = Boolean('true');
+			
+			
+			switch (self.accessoryservicetype) {
+			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			break;
+			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+			break;
+			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+			break;
+			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+			break;
+			}
 		}
+		
+		
 		var sensoroff = Boolean(self.rfcodeoff == rfreceiveddata);
 		if (sensoroff) {
 			self.value = Boolean(0);
+			
+			
+switch (self.accessoryservicetype) {
+			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			break;
+			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+			break;
+			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+			break;
+			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+			break;
+			}
 		}
+		
+		
+		
 		var bateria = Boolean(self.rfcodelowbaterry == rfreceiveddata);
 		if (bateria){
 		self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
