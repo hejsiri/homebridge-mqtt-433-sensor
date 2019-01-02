@@ -151,7 +151,7 @@ function RfSensorAccessory(log, config) {
 			self.value = Boolean(0);
 			
 			
-switch (self.accessoryservicetype) {
+			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 			break;
@@ -168,10 +168,13 @@ switch (self.accessoryservicetype) {
 		}
 		
 		
-		
-		var bateria = Boolean(self.rfcodelowbaterry == rfreceiveddata);
-		if (bateria){
-		self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+		switch (self.accessoryservicetype) {
+		case 'ContactSensor':
+			var bateria = Boolean(self.rfcodelowbaterry == rfreceiveddata);
+			if (bateria){
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+			}
+		break;
 		}
 	});
 
