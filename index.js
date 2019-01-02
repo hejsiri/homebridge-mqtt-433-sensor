@@ -175,7 +175,7 @@ function RfSensorAccessory(log, config) {
 		
 		
 		switch (self.accessoryservicetype) {
-		case 'ContactSensor':
+		case 'SmokeSensor':
 		
 			var bateria = Boolean(self.rfcodelowbaterry == rfreceiveddata);
 			if (bateria){
