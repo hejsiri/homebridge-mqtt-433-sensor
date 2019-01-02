@@ -169,20 +169,9 @@ function RfSensorAccessory(log, config) {
 		}
 		
 		
-		let batsvc = new Service.BatteryService( name + '-battery' );
-		services.push( batsvc );
 		
-		
-		
-		switch (self.accessoryservicetype) {
-		case 'SmokeSensor':
-		
-			var bateria = Boolean(self.rfcodelowbaterry == rfreceiveddata);
-			if (bateria){
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			}
-		break;
-		}
+		
 	});
 
 }
