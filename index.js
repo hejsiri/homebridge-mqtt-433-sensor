@@ -49,10 +49,10 @@ function RfSensorAccessory(log, config) {
 		break;
 	case 'ContactSensor':
 		this.service = new Service.ContactSensor();
+		this.service.getCharacteristic(Characteristic.StatusLowBattery);
 		break;
 	case 'SmokeSensor':
 		this.service = new Service.SmokeSensor();
-		this.service.getCharacteristic(Characteristic.StatusLowBattery);
 		break;
 	case 'LeakSensor':
 		this.service = new Service.LeakSensor();
@@ -158,6 +158,7 @@ function RfSensorAccessory(log, config) {
 			break;
 			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			break;
 			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
@@ -166,11 +167,14 @@ function RfSensorAccessory(log, config) {
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 			break;
 			}
+			
+			
+			
+			
 		}
 		
 		
 		
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 		
 	});
 
