@@ -20,6 +20,7 @@ function RfSensorAccessory(log, config) {
 	this.ondelay = config['ondelay'] || 10000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
+	this.rfcodelowbattery = config['rfcodelowbattery'] || 'undefined';
 	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' ||'ContactSensor';
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
@@ -168,10 +169,25 @@ function RfSensorAccessory(log, config) {
 			break;
 			}
 			
+					
+		}
+		
+		
+		
+		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
+		if (lowbat) {
+			self.value = Boolean(0);
+						
+			switch (self.accessoryservicetype) {
+				case 'ContactSensor':
+						self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+				break;
 			
-			
+			}
 			
 		}
+
+		
 		
 		
 		
