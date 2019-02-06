@@ -178,7 +178,7 @@ function RfSensorAccessory(log, config) {
 		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
 		if (lowbat) {
 			
-			clearTimeout(timeout);
+			
 			self.value = Boolean('true');						
 			
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
