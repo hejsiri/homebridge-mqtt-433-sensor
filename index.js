@@ -18,7 +18,7 @@ function RfSensorAccessory(log, config) {
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
 	this.ondelay = config['ondelay'] || 10000;
-	this.ondelaylowbattery = config['ondelaylowbattery'] || 10000;
+	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
 	this.rfcodelowbattery = config['rfcodelowbattery'] || 'undefined';
@@ -214,7 +214,7 @@ RfSensorAccessory.prototype.getServices = function() {
 		.setCharacteristic(Characteristic.Name, this.name)
 		.setCharacteristic(Characteristic.Manufacturer, "Sonoff")
 		.setCharacteristic(Characteristic.Model, "RF Bridge 433")
-    	.setCharacteristic(Characteristic.SerialNumber, this.serialNumberMAC);
+    		.setCharacteristic(Characteristic.SerialNumber, this.serialNumberMAC);
 
 	return [informationService, this.service];
 }
