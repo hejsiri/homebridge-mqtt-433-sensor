@@ -182,7 +182,10 @@ function RfSensorAccessory(log, config) {
 			
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			
-			
+			self.value = Boolean(0);
+			timeout = setTimeout(function() {
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+}.bind(self), self.ondelay);
 			
 			
 		}
