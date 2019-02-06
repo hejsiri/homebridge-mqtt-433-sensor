@@ -94,6 +94,8 @@ function RfSensorAccessory(log, config) {
 				if (sensoractive) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+						
+					self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 				}
 				self.value = Boolean(0);
 				break;
@@ -159,7 +161,6 @@ function RfSensorAccessory(log, config) {
 			break;
 			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			break;
 			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
