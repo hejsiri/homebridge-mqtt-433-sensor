@@ -156,9 +156,9 @@ function RfSensorAccessory(log, config) {
 			
 			
 			switch (self.accessoryservicetype) {
-			case 'MotionSensor':
-			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-			break;
+			//case 'MotionSensor':
+			//self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			//break;
 			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
