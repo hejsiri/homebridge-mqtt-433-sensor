@@ -96,8 +96,7 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 						
-					self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-				}
+					}
 				self.value = Boolean(0);
 				break;
 			case 'LeakSensor':
