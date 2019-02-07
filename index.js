@@ -186,7 +186,6 @@ function RfSensorAccessory(log, config) {
 		if (lowbat) {
 			switch (self.accessoryservicetype) {
 			case 'ContactSensor':
-		
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			self.value = Boolean(0);
@@ -195,7 +194,6 @@ function RfSensorAccessory(log, config) {
 }.bind(self), self.ondelaylowbattery);
 			break;
 			case 'MotionSensor':
-			
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			self.value = Boolean(0);
