@@ -182,10 +182,14 @@ function RfSensorAccessory(log, config) {
 		
 		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
 		if (lowbat) {
+			switch (self.accessoryservicetype) {
+			case 'ContactSensor':
 			clearTimeout(timeoutbat);
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-
+					break;
+			
+			}
 			}
 		
 		self.value = Boolean(0);
