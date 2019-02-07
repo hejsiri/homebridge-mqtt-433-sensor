@@ -87,13 +87,13 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
-				if (lowbat === null){
+				
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
 					
-				}
+				
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
@@ -112,7 +112,7 @@ function RfSensorAccessory(log, config) {
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
+				}.bind(self), self.ondelayleak);
 				break;
 			case 'SmokeSensor':
 				if (sensoractive) {
@@ -123,7 +123,7 @@ function RfSensorAccessory(log, config) {
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
+				}.bind(self), self.ondelaysmoke);
 				break;
 			case 'StatelessProgrammableSwitch':
 				if (sensoractive) {
