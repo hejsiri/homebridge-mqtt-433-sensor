@@ -87,7 +87,7 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
-				if (!lowbat){
+				if (lowbat === null){
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
