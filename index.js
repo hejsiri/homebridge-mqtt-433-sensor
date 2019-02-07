@@ -187,9 +187,19 @@ function RfSensorAccessory(log, config) {
 			
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			self.value = Boolean(0);
+			self1.value = Boolean(0);
 			timeoutbat = setTimeout(function() {
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self1.value);
+}.bind(self), self.ondelaylowbattery);
+			break;
+					
+			case 'MotionSensor':
+			
+			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+			self2.value = Boolean(0);
+			timeoutbat = setTimeout(function() {
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self2.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
 			
