@@ -84,13 +84,13 @@ function RfSensorAccessory(log, config) {
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 				if (sensoractive) {
-					clearTimeout(timeout);
+					clearTimeout(timeoutms);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
 				
 				self.value = Boolean(0);
-				timeout = setTimeout(function() {
+				timeoutms = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelaymotion);
 					
@@ -106,23 +106,23 @@ function RfSensorAccessory(log, config) {
 				break;
 			case 'LeakSensor':
 				if (sensoractive) {
-					clearTimeout(timeout);
+					clearTimeout(timeoutls);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}
 				self.value = Boolean(0);
-				timeout = setTimeout(function() {
+				timeoutls = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}.bind(self), self.ondelayleak);
 				break;
 			case 'SmokeSensor':
 				if (sensoractive) {
-					clearTimeout(timeout);
+					clearTimeout(timeoutss);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				}
 				self.value = Boolean(0);
-				timeout = setTimeout(function() {
+				timeoutss = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				}.bind(self), self.ondelaysmoke);
 				break;
