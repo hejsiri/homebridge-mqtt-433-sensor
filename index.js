@@ -79,17 +79,21 @@ function RfSensorAccessory(log, config) {
 		var rfreceivedrfkey = data.RfReceived.RfKey;
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
 			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
+			var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 				if (sensoractive) {
-					//clearTimeout(timeout);
+					clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
+				if (!lowbat){
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
+					
+				}
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
