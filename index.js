@@ -80,7 +80,7 @@ function RfSensorAccessory(log, config) {
 		var rfreceivedrfkey = data.RfReceived.RfKey;
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
 			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
-			var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
+			
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 				if (sensoractive) {
@@ -184,18 +184,19 @@ function RfSensorAccessory(log, config) {
 		if (lowbat) {
 			switch (self.accessoryservicetype) {
 			case 'ContactSensor':
-			clearTimeout(timeoutbat);
+			
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-					break;
+			self.value = Boolean(0);
+			timeoutbat = setTimeout(function() {
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+}.bind(self), self.ondelaylowbattery);
+			break;
 			
 			}
 			}
 		
-		self.value = Boolean(0);
-		timeoutbat = setTimeout(function() {
-		self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-}.bind(self), self.ondelaylowbattery);
+		
 		
 		
 		
