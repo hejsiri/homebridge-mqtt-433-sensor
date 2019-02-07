@@ -179,33 +179,7 @@ function RfSensorAccessory(log, config) {
 		}
 		
 		
-		
-		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
-		if (lowbat) {
-			switch (self.accessoryservicetype) {
-			case 'ContactSensor':
-			
-			self.value = Boolean('true');						
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			self.value = Boolean(0);
-			timeoutbat = setTimeout(function() {
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-}.bind(self), self.ondelaylowbattery);
-			break;
-					
-			case 'MotionSensor':
-			
-			self.value = Boolean('true');						
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			self.value = Boolean(0);
-			timeoutbat = setTimeout(function() {
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-}.bind(self), self.ondelaylowbattery);
-			break;
-			
-			}
-			}
-		
+
 		
 		
 		
