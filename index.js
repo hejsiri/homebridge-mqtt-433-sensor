@@ -178,22 +178,15 @@ function RfSensorAccessory(log, config) {
 		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
 		if (lowbat) {
 			
-			
 			self.value = Boolean('true');						
-			
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			
 
-			
-			
-				self.value = Boolean(0);
-			timeout = setTimeout(function() {
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-}.bind(self), self.ondelaylowbattery);
-			
-			
-		}
+			}
 		
+		self.value = Boolean(0);
+		timeout = setTimeout(function() {
+		self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+}.bind(self), self.ondelaylowbattery);
 		
 
 		
