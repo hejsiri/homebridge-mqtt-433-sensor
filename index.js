@@ -18,6 +18,7 @@ function RfSensorAccessory(log, config) {
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
 	this.ondelay = config['ondelay'] || 10000;
+	this.ondelaymotion = config['ondelaymotion'] || 15000;
 	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
@@ -91,7 +92,7 @@ function RfSensorAccessory(log, config) {
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
+				}.bind(self), self.ondelaymotion);
 					
 				
 				break;
