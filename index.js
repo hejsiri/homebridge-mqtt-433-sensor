@@ -167,12 +167,12 @@ function RfSensorAccessory(log, config) {
 			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
-			case 'SmokeSensor':
-			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-			break;
-			case 'LeakSensor':
-			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-			break;
+			//case 'SmokeSensor':
+			//self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+			//break;
+			//case 'LeakSensor':
+			//self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+			//break;
 			}
 			
 					
@@ -187,13 +187,13 @@ function RfSensorAccessory(log, config) {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 
 			}
-		
+		if (lowbat === null) {
 		self.value = Boolean(0);
 		timeoutbat = setTimeout(function() {
 		self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 		
-
+		}
 		
 		
 		
