@@ -82,7 +82,7 @@ function RfSensorAccessory(log, config) {
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 				if (sensoractive) {
-					clearTimeout(timeout);
+					//clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
