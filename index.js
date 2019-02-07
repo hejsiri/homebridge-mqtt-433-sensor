@@ -194,7 +194,6 @@ function RfSensorAccessory(log, config) {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
-					
 			case 'MotionSensor':
 			clearTimeout(timeoutbat);
 			self.value = Boolean('true');						
