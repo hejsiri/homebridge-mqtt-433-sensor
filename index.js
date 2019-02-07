@@ -187,9 +187,9 @@ function RfSensorAccessory(log, config) {
 			
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			self1.value = Boolean(0);
+			self.value = Boolean(0);
 			timeoutbat = setTimeout(function() {
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self1.value);
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
 					
@@ -197,9 +197,9 @@ function RfSensorAccessory(log, config) {
 			
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			self2.value = Boolean(0);
+			self.value = Boolean(0);
 			timeoutbat = setTimeout(function() {
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self2.value);
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
 			
