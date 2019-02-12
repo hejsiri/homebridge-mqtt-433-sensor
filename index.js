@@ -76,10 +76,11 @@ function RfSensorAccessory(log, config) {
 		if (data === null) return null;
 		var rfreceiveddata = data.RfReceived.Data;
 		var rfreceivedrfkey = data.RfReceived.RfKey;
-		//if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
-		//	var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode //== 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
-		//
-		//}
+		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
+			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
+			
+		
+		}
 		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
 		if (sensoron) {
 			self.value = Boolean('true');
@@ -88,8 +89,8 @@ function RfSensorAccessory(log, config) {
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-					self.value = Boolean(0);
-					clearTimeout(timeout);
+			self.value = Boolean(0);
+				clearTimeout(timeout);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
@@ -107,8 +108,8 @@ function RfSensorAccessory(log, config) {
 			break;
 			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-			self.value = Boolean(0);
-			clearTimeout(timeout);
+				self.value = Boolean(0);
+				clearTimeout(timeout);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
@@ -138,6 +139,7 @@ function RfSensorAccessory(log, config) {
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			self.value = Boolean(0);
+			clearTimeout(timeoutbat);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
@@ -147,6 +149,7 @@ function RfSensorAccessory(log, config) {
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			self.value = Boolean(0);
+			clearTimeout(timeoutbat);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
@@ -155,7 +158,7 @@ function RfSensorAccessory(log, config) {
 			}
 			}
 		
-	}
+	});
 
 }
 
