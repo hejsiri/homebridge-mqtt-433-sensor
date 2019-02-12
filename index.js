@@ -94,7 +94,7 @@ function RfSensorAccessory(log, config) {
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
-					clearTimeout(timeout);
+					//clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 						}
