@@ -61,6 +61,7 @@ Sample HomeBridge Configuration
             "password": "password",
             "rfcode": "2E1A21",
             "ondelay": "60000",
+            "ondelaylowbattery": "30000",
             "rfcodelowbattery": "2E1A22",
             "accessoryservicetype": "SmokeSensor",
             "name": "Smoke Sensor"
