@@ -14,19 +14,71 @@ Sample HomeBridge Configuration
 --------------------
 
         {
-          "accessory": "mqtt-433-sensor",
-          "name": "Sensor 1",
-          "url": "mqtt://localhost",
-          "topic": "tele/sonoff_rf/RESULT",
-          "username": "username",
-          "password": "password",
-          "rfcode": "7FFFFF" or "any",
-          "rfkey": "1..16" or "any",
-          "ondelay": "10000", (time in ms while the sensor is active, the default is 10000)
-          "rfcodeon": "7FFFFF",
-          "rfcodeoff": "8FFFFF",
-          "accessoryservicetype": "MotionSensor" or "StatelessProgrammableSwitch" or "ContactSensor" or "SmokeSensor" or "LeakSensor"
+            "accessory": "mqtt-433-sensor",
+            "url": "mqtt://localhost",
+            "topic": "tele/rf-bridge/RESULT",
+            "username": "username",
+            "password": "password",
+            "rfcodeon": "2E1A11",
+            "rfcodeoff": "2E1A12",
+            "rfcodelowbattery": "2E1A14",
+            "accessoryservicetype": "ContactSensor",
+            "name": "Contact Sensor"
+        },
+        {
+            "accessory": "mqtt-433-sensor",
+            "url": "mqtt://localhost",
+            "topic": "tele/rf-bridge/RESULT",
+            "username": "username",
+            "password": "password",
+            "rfcode": "2E1A21",
+            "ondelay": "30000",
+            "rfcodelowbattery": "2E1A22",
+            "accessoryservicetype": "MotionSensor",
+            "name": "Motion Sensor"
+        },
+        {
+            "accessory": "mqtt-433-sensor",
+            "url": "mqtt://localhost",
+            "topic": "tele/rf-bridge/RESULT",
+            "username": "username",
+            "password": "password",
+            "rfcode": "2E1A21",
+            "ondelay": "10000",
+            "rfcodelowbattery": "2E1A22",
+            "accessoryservicetype": "LeakSensor",
+            "name": "Leak Sensor"
+        },
+        {
+            "accessory": "mqtt-433-sensor",
+            "url": "mqtt://localhost",
+            "topic": "tele/rf-bridge/RESULT",
+            "username": "username",
+            "password": "password",
+            "rfcode": "2E1A21",
+            "ondelay": "60000",
+            "rfcodelowbattery": "2E1A22",
+            "accessoryservicetype": "SmokeSensor",
+            "name": "Smoke Sensor"
+        },
+        {
+            "accessory": "mqtt-433-sensor",
+            "url": "mqtt://localhost",
+            "topic": "tele/rf-bridge/RESULT",
+            "username": "username",
+            "password": "password",
+            "rfcode": "2E1A21",
+            "ondelay": "10000",
+            "rfcodelowbattery": "2E1A22",
+            "accessoryservicetype": "StatelessProgrammableSwitch",
+            "name": "RF Button"
         }
+        
+        
+        
+        
+        
+        
 
 Supported sensors (accessory service type)
 --------------------
