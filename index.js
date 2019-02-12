@@ -94,7 +94,6 @@ function RfSensorAccessory(log, config) {
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
-					//clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 						}
@@ -157,7 +156,6 @@ function RfSensorAccessory(log, config) {
 			
 			switch (self.accessoryservicetype) {
 			case 'ContactSensor':
-			clearTimeout(timeout);
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
 			}
@@ -173,7 +171,6 @@ function RfSensorAccessory(log, config) {
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			self.value = Boolean(0);
-					clearTimeout(timeoutbat);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
@@ -183,7 +180,6 @@ function RfSensorAccessory(log, config) {
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 			self.value = Boolean(0);
-					clearTimeout(timeoutbat);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
