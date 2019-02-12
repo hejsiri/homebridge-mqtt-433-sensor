@@ -90,6 +90,10 @@ Supported sensors (accessory service type)
 
 Release notes
 --------------------
+Version 0.1.11
+- bugs fixed
+- added Low battery status
+
 Version 0.1.7
 - bugs fixed
 - added smoke sensor
