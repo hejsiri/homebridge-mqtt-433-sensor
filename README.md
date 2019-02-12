@@ -75,7 +75,7 @@ Sample HomeBridge Configuration
             "ondelay": "10000",
             "rfcodelowbattery": "2E1A22",
             "accessoryservicetype": "StatelessProgrammableSwitch",
-            "name": "RF Button"
+            "name": "RF Button 433"
         }
         
         
