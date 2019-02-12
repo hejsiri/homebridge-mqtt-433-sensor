@@ -51,7 +51,6 @@ function RfSensorAccessory(log, config) {
 		break;
 	case 'ContactSensor':
 		this.service = new Service.ContactSensor();
-		this.service.getCharacteristic(Characteristic.StatusLowBattery);
 		break;
 	case 'SmokeSensor':
 		this.service = new Service.SmokeSensor();
@@ -92,16 +91,13 @@ function RfSensorAccessory(log, config) {
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
-					
-				
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
-						
-					}
-				self.value = Boolean(0);
+						}
+				
 				break;
 			case 'LeakSensor':
 				if (sensoractive) {
@@ -158,29 +154,15 @@ function RfSensorAccessory(log, config) {
 		if (sensoroff) {
 			self.value = Boolean(0);
 			
-			
 			switch (self.accessoryservicetype) {
-			//case 'MotionSensor':
-			//self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-			//break;
 			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
-			//case 'SmokeSensor':
-			//self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-			//break;
-			//case 'LeakSensor':
-			//self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-			//break;
 			}
-			
-					
 		}
 		
 		
-
 		
-				
 		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
 		if (lowbat) {
 			switch (self.accessoryservicetype) {
@@ -193,6 +175,7 @@ function RfSensorAccessory(log, config) {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
+					
 			case 'MotionSensor':
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
@@ -204,12 +187,6 @@ function RfSensorAccessory(log, config) {
 			
 			}
 			}
-		
-		
-		
-		
-		
-		
 		
 	});
 
