@@ -89,6 +89,7 @@ function RfSensorAccessory(log, config) {
 			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 					self.value = Boolean(0);
+					clearTimeout(timeout);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
@@ -98,7 +99,8 @@ function RfSensorAccessory(log, config) {
 			break;
 			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-						self.value = Boolean(0);
+				self.value = Boolean(0);
+				clearTimeout(timeout);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
@@ -106,6 +108,7 @@ function RfSensorAccessory(log, config) {
 			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 			self.value = Boolean(0);
+			clearTimeout(timeout);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
@@ -152,7 +155,7 @@ function RfSensorAccessory(log, config) {
 			}
 			}
 		
-	});
+	}
 
 }
 
