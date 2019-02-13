@@ -80,16 +80,73 @@ function RfSensorAccessory(log, config) {
 		var rfreceiveddata = data.RfReceived.Data;
 		var rfreceivedrfkey = data.RfReceived.RfKey;
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
-			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
+			
 	
+			switch (self.accessoryservicetype) {
+			case 'MotionSensor':
+			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
+				if (sensoractive) {
+					clearTimeout(timeout);
+					self.value = Boolean('true');
+					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				}
+				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
+				break;
+			case 'ContactSensor':
+				if (sensoractive) {
+					self.value = Boolean('true');
+					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+						}
+				
+				break;
+			case 'LeakSensor':
+				var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
+				if (sensoractive) {
+					clearTimeout(timeout);
+					self.value = Boolean('true');
+					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+				}
+				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
+				break;
+			case 'SmokeSensor':
+				var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
+				if (sensoractive) {
+					clearTimeout(timeout);
+					self.value = Boolean('true');
+					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+				}
+				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
+				break;
+			case 'StatelessProgrammableSwitch':
+				if (sensoractive) {
+					self.service.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setValue(0);
+				}
+				break;
+			}
+			
+			
+			
+			
+			
+			
 		}
-		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
-		if (sensoron) {
-			self.value = Boolean('true');
+	
 			
 			
 			switch (self.accessoryservicetype) {
+		
 			case 'MotionSensor':
+		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+		if (sensoron) {	self.value = Boolean('true');}
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				self.value = Boolean(0);
 					clearTimeout(timeout);
@@ -101,6 +158,8 @@ function RfSensorAccessory(log, config) {
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
 			case 'SmokeSensor':
+			var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+		if (sensoron) {	self.value = Boolean('true');}
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				self.value = Boolean(0);
 					clearTimeout(timeout);
@@ -109,14 +168,16 @@ function RfSensorAccessory(log, config) {
 				}.bind(self), self.ondelay);
 			break;
 			case 'LeakSensor':
+					var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+		if (sensoron) {	self.value = Boolean('true');}
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				self.value = Boolean(0);
-				clearTimeout(timeoutls);
+				clearTimeout(timeout);
 				timeoutls = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				}.bind(self), self.ondelayls);
+				}.bind(self), self.ondelay);
 			break;
-			}
+			
 		}
 		
 		
