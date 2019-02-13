@@ -70,6 +70,7 @@ function RfSensorAccessory(log, config) {
 	var self = this;
 	var timeout;
 	var timeoutbat;
+	var timeoutls;
 
 	this.client.subscribe(this.topic);
  
@@ -143,8 +144,8 @@ function RfSensorAccessory(log, config) {
 			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				self.value = Boolean(0);
-				clearTimeout(timeout);
-				timeout = setTimeout(function() {
+				clearTimeout(timeoutls);
+				timeoutls = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}.bind(self), self.ondelayls);
 			break;
