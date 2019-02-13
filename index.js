@@ -145,8 +145,8 @@ function RfSensorAccessory(log, config) {
 			switch (self.accessoryservicetype) {
 		
 			case 'MotionSensor':
-		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
-		if (sensoron) {	self.value = Boolean('true');}
+				var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+				if (sensoron) {	self.value = Boolean('true');}
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				self.value = Boolean(0);
 					clearTimeout(timeout);
