@@ -70,7 +70,7 @@ function RfSensorAccessory(log, config) {
 	var self = this;
 	var timeout;
 	var timeoutbat;
-	var timeoutls;
+
 
 	this.client.subscribe(this.topic);
  
@@ -143,40 +143,24 @@ function RfSensorAccessory(log, config) {
 			
 			
 			switch (self.accessoryservicetype) {
-		
 			case 'MotionSensor':
 				var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
 				if (sensoron) {	self.value = Boolean('true');}
-			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				self.value = Boolean(0);
-					clearTimeout(timeout);
-				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
-			break;
+				break;
 			case 'ContactSensor':
-			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
-			break;
+				self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+				break;
 			case 'SmokeSensor':
-			var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
-		if (sensoron) {	self.value = Boolean('true');}
-			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				self.value = Boolean(0);
-					clearTimeout(timeout);
-				timeout = setTimeout(function() {
+				var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+				if (sensoron) {	self.value = Boolean('true');}
 				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
-			break;
+				break;
 			case 'LeakSensor':
-					var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
-		if (sensoron) {	self.value = Boolean('true');}
+				var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+				if (sensoron) {	self.value = Boolean('true');}
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				self.value = Boolean(0);
-				clearTimeout(timeout);
-				timeoutls = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
-			break;
+				break;
 			
 		}
 		
