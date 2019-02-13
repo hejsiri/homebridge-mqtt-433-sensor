@@ -81,40 +81,7 @@ function RfSensorAccessory(log, config) {
 		var rfreceivedrfkey = data.RfReceived.RfKey;
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
 			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
-			
-			switch (self.accessoryservicetype) {
-			case 'MotionSensor':
-				if (sensoractive) {
-				
-					self.value = Boolean('true');
-					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}
-				break;
-			case 'ContactSensor':
-				if (sensoractive) {
-					self.value = Boolean('true');
-					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
-						}
-				
-				break;
-			case 'LeakSensor':
-				if (sensoractive) {
-					self.value = Boolean('true');
-					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				}
-				break;
-			case 'SmokeSensor':
-				if (sensoractive) {
-					self.value = Boolean('true');
-					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				}
-				break;
-			case 'StatelessProgrammableSwitch':
-				if (sensoractive) {
-					self.service.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setValue(0);
-				}
-				break;
-			}
+	
 		}
 		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
 		if (sensoron) {
