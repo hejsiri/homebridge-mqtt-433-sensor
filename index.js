@@ -23,7 +23,7 @@ function RfSensorAccessory(log, config) {
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
 	this.rfcodelowbattery = config['rfcodelowbattery'] || 'undefined';
-	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' ||'ContactSensor';
+	this.accessoryservicetype = config['accessoryservicetype'] ;
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
