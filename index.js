@@ -68,6 +68,7 @@ function RfSensorAccessory(log, config) {
 
 	var self = this;
 	var timeout;
+	var timeoutbat;
 
 	this.client.subscribe(this.topic);
  
@@ -96,7 +97,6 @@ function RfSensorAccessory(log, config) {
 				break;
 			case 'LeakSensor':
 				if (sensoractive) {
-					clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}
@@ -124,6 +124,7 @@ function RfSensorAccessory(log, config) {
 			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				self.value = Boolean(0);
+				clearTimeout(timeout);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
@@ -133,6 +134,7 @@ function RfSensorAccessory(log, config) {
 			break;
 			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+				clearTimeout(timeout);
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
@@ -140,7 +142,8 @@ function RfSensorAccessory(log, config) {
 			break;
 			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-			self.value = Boolean(0);
+				self.value = Boolean(0);
+				clearTimeout(timeout);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}.bind(self), self.ondelay);
@@ -165,19 +168,19 @@ function RfSensorAccessory(log, config) {
 		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
 		if (lowbat) {
 			switch (self.accessoryservicetype) {
-			
 			case 'ContactSensor':
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+			clearTimeout(timeoutbat);
 			self.value = Boolean(0);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
-					
 			case 'MotionSensor':
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+			clearTimeout(timeoutbat);
 			self.value = Boolean(0);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
