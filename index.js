@@ -18,12 +18,11 @@ function RfSensorAccessory(log, config) {
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
 	this.ondelay = config['ondelay'] || 10000;
-	this.ondelayls = config['ondelay'] || 5000;
 	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
 	this.rfcodelowbattery = config['rfcodelowbattery'] || 'undefined';
-	this.accessoryservicetype = config['accessoryservicetype'] ;
+	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' ||'ContactSensor';
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
@@ -69,8 +68,6 @@ function RfSensorAccessory(log, config) {
 
 	var self = this;
 	var timeout;
-	var timeoutbat;
-
 
 	this.client.subscribe(this.topic);
  
@@ -80,16 +77,16 @@ function RfSensorAccessory(log, config) {
 		var rfreceiveddata = data.RfReceived.Data;
 		var rfreceivedrfkey = data.RfReceived.RfKey;
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
+			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
 			
-	
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
-			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
 				if (sensoractive) {
 					clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
+				
 				self.value = Boolean(0);
 				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
@@ -103,7 +100,6 @@ function RfSensorAccessory(log, config) {
 				
 				break;
 			case 'LeakSensor':
-				var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
 				if (sensoractive) {
 					clearTimeout(timeout);
 					self.value = Boolean('true');
@@ -115,7 +111,6 @@ function RfSensorAccessory(log, config) {
 				}.bind(self), self.ondelay);
 				break;
 			case 'SmokeSensor':
-				var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
 				if (sensoractive) {
 					clearTimeout(timeout);
 					self.value = Boolean('true');
@@ -132,36 +127,26 @@ function RfSensorAccessory(log, config) {
 				}
 				break;
 			}
-			
-			
-			
-			
-			
-			
 		}
-	
+		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+		if (sensoron) {
+			self.value = Boolean('true');
 			
 			
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
-				var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
-				if (sensoron) {	self.value = Boolean('true');}
-				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				break;
+			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+			break;
 			case 'ContactSensor':
-				self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
-				break;
+			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
+			break;
 			case 'SmokeSensor':
-				var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
-				if (sensoron) {	self.value = Boolean('true');}
-				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				break;
+			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+			break;
 			case 'LeakSensor':
-				var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
-				if (sensoron) {	self.value = Boolean('true');}
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				break;
-			
+			break;
+			}
 		}
 		
 		
@@ -181,19 +166,19 @@ function RfSensorAccessory(log, config) {
 		var lowbat = Boolean(self.rfcodelowbattery == rfreceiveddata);
 		if (lowbat) {
 			switch (self.accessoryservicetype) {
+			
 			case 'ContactSensor':
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			clearTimeout(timeoutbat);
 			self.value = Boolean(0);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
+					
 			case 'MotionSensor':
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			clearTimeout(timeoutbat);
 			self.value = Boolean(0);
 			timeoutbat = setTimeout(function() {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
