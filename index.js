@@ -17,8 +17,7 @@ function RfSensorAccessory(log, config) {
   	this.serialNumberMAC = config['serialNumberMAC'] || "";
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
-	this.ondelay = config['ondelay'] || 50000;
-	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
+	this.ondelay = config['ondelay'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
 	this.rfcodelowbattery = config['rfcodelowbattery'] || 'undefined';
@@ -82,11 +81,8 @@ function RfSensorAccessory(log, config) {
 		var rfreceivedrfkey = data.RfReceived.RfKey;
 		if (self.rfcode != 'undefined' || self.rfkey != 'undefined') {
 			var sensoractive = Boolean(self.rfcode == rfreceiveddata || self.rfcode == 'any' || self.rfkey == rfreceivedrfkey || self.rfkey == 'any');
-			var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
+					
 			
-			if (sensoron){
-				
-			} else
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 				if (sensoractive) {
@@ -94,8 +90,12 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
+				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
 				break;
-			case 'ContactSensor':
+				case 'ContactSensor':
 				if (sensoractive) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
@@ -119,11 +119,11 @@ function RfSensorAccessory(log, config) {
 				}
 				break;
 			}
-		}}
+		}
 		
+		
+		var sensoron = Boolean(self.rfcodeon == rfreceiveddata);
 		if (sensoron) {
-			
-			
 			
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
