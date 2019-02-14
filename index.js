@@ -18,9 +18,7 @@ function RfSensorAccessory(log, config) {
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
 	this.ondelay = config['ondelay'] || 10000;
-	this.ondelayss = 30000;
-	this.ondelayls = 20000;
-	this.ondelayms = 10000;
+	this.ondelayms = 20000;
 	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
@@ -73,8 +71,7 @@ function RfSensorAccessory(log, config) {
 	var timeout;
 	var timeoutbat;
 	var timeoutms;
-	var timeoutls;
-	var timeoutss;
+
 	
 
 
@@ -109,14 +106,14 @@ function RfSensorAccessory(log, config) {
 				break;
 			case 'LeakSensor':
 				if (sensoractive) {
-					clearTimeout(timeoutls);
+					
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}
 				break;
 			case 'SmokeSensor':
 				if (sensoractive) {
-					clearTimeout(timeoutss);
+				
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				}
@@ -137,10 +134,10 @@ function RfSensorAccessory(log, config) {
 			case 'MotionSensor':
 					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				self.value = Boolean(0);
-				timeoutms = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelayms);
+				//self.value = Boolean(0);
+				//timeoutms = setTimeout(function() {
+				//self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				//}.bind(self), self.ondelayms);
 			break;
 			case 'ContactSensor':
 					self.value = Boolean('true');
@@ -149,10 +146,10 @@ function RfSensorAccessory(log, config) {
 			case 'SmokeSensor':
 					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				self.value = Boolean(0);
-				timeoutss = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				}.bind(self), self.ondelayss);
+				//self.value = Boolean(0);
+				//timeoutss = setTimeout(function() {
+				//self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+				//}.bind(self), self.ondelayss);
 			break;
 			case 'LeakSensor':
 					self.value = Boolean('true');
