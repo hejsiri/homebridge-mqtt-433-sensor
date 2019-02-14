@@ -18,8 +18,8 @@ function RfSensorAccessory(log, config) {
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
 	this.ondelay = config['ondelay'] || 10000;
-	this.ondelayss = config['ondelayss'] || 10000;
-	this.ondelayls = config['ondelayls'] || 10000;
+	this.ondelayss = config['ondelayss'] || 30000;
+	this.ondelayls = config['ondelayls'] || 20000;
 	this.ondelayms = config['ondelayms'] || 10000;
 	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
