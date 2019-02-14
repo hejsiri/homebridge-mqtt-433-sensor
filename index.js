@@ -18,6 +18,9 @@ function RfSensorAccessory(log, config) {
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
 	this.ondelay = config['ondelay'] || 10000;
+	this.ondelayss = config['ondelay'] || 10000;
+	this.ondelayls = config['ondelay'] || 10000;
+	this.ondelayms = config['ondelay'] || 10000;
 	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
@@ -69,9 +72,7 @@ function RfSensorAccessory(log, config) {
 	var self = this;
 	var timeout;
 	var timeoutbat;
-	var timeoutms;
-	var timeoutls;
-	var timeoutss;
+	
 
 
 	this.client.subscribe(this.topic);
@@ -128,10 +129,10 @@ function RfSensorAccessory(log, config) {
 			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				self.value = Boolean(0);
-					clearTimeout(timeoutms);
-				timeoutms = setTimeout(function() {
+					clearTimeout(timeout);
+				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
+				}.bind(self), self.ondelayms);
 			break;
 			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
@@ -139,18 +140,18 @@ function RfSensorAccessory(log, config) {
 			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				self.value = Boolean(0);
-					clearTimeout(timeoutss);
-				timeoutss = setTimeout(function() {
+					clearTimeout(timeout);
+				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
+				}.bind(self), self.ondelayss);
 			break;
 			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				self.value = Boolean(0);
-					clearTimeout(timeoutls);
-				timeoutls = setTimeout(function() {
+					clearTimeout(timeout);
+				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
+				}.bind(self), self.ondelayls);
 			break;
 			}
 		}
