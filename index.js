@@ -157,10 +157,10 @@ function RfSensorAccessory(log, config) {
 			case 'LeakSensor':
 					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				self.value = Boolean(0);
-				timeoutls = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				}.bind(self), self.ondelayls);
+				//self.value = Boolean(0);
+				//timeoutls = setTimeout(function() {
+				//self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+					//}.bind(self), self.ondelayls);
 			break;
 			}
 		}
