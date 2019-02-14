@@ -22,7 +22,7 @@ function RfSensorAccessory(log, config) {
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
 	this.rfcodelowbattery = config['rfcodelowbattery'] || 'undefined';
-	this.accessoryservicetype = config['accessoryservicetype'] || 'MotionSensor' ||'ContactSensor';
+	this.accessoryservicetype = config['accessoryservicetype'] || 'undefined';
 
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 
@@ -86,18 +86,12 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
-				
-				self.value = Boolean(0);
-				timeout = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 						}
-				
 				break;
 			case 'LeakSensor':
 				if (sensoractive) {
@@ -105,10 +99,6 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}
-				self.value = Boolean(0);
-				timeout = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
 				break;
 			case 'SmokeSensor':
 				if (sensoractive) {
@@ -116,10 +106,6 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				}
-				self.value = Boolean(0);
-				timeout = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
 				break;
 			case 'StatelessProgrammableSwitch':
 				if (sensoractive) {
@@ -136,15 +122,27 @@ function RfSensorAccessory(log, config) {
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
 			break;
 			case 'ContactSensor':
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
 			case 'SmokeSensor':
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
 			break;
 			case 'LeakSensor':
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+				self.value = Boolean(0);
+				timeout = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
+				}.bind(self), self.ondelay);
 			break;
 			}
 		}
@@ -184,7 +182,25 @@ function RfSensorAccessory(log, config) {
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
-			
+			case 'LakeSensor':
+			self.value = Boolean('true');						
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+			self.value = Boolean(0);
+			timeoutbat = setTimeout(function() {
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+}.bind(self), self.ondelaylowbattery);
+			break;
+			case 'SmokeSensor':
+			self.value = Boolean('true');						
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+			self.value = Boolean(0);
+			timeoutbat = setTimeout(function() {
+			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+}.bind(self), self.ondelaylowbattery);
+			break;
+					
+					
+					
 			}
 			}
 		
