@@ -91,7 +91,7 @@ function RfSensorAccessory(log, config) {
 			
 			if (sensoron){
 				
-			}else
+			} else
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 				if (sensoractive) {
