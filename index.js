@@ -72,6 +72,9 @@ function RfSensorAccessory(log, config) {
 	var self = this;
 	var timeout;
 	var timeoutbat;
+	var timeoutms;
+	var timeoutls;
+	var timeoutss;
 	
 
 
