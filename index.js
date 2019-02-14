@@ -96,6 +96,10 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
+				self.value = Boolean(0);
+				timeoutms = setTimeout(function() {
+				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
+				}.bind(self), self.ondelayms);
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
@@ -134,10 +138,7 @@ function RfSensorAccessory(log, config) {
 			case 'MotionSensor':
 					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				//self.value = Boolean(0);
-				//timeoutms = setTimeout(function() {
-				//self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				//}.bind(self), self.ondelayms);
+			
 			break;
 			case 'ContactSensor':
 					self.value = Boolean('true');
