@@ -94,28 +94,21 @@ function RfSensorAccessory(log, config) {
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
-				self.value = Boolean(0);
-				timeout = setTimeout(function() {
-				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelay);
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
-					
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 						}
 				break;
 			case 'LeakSensor':
 				if (sensoractive) {
-					
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				}
 				break;
 			case 'SmokeSensor':
 				if (sensoractive) {
-				
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				}
@@ -134,29 +127,20 @@ function RfSensorAccessory(log, config) {
 			
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
-					self.value = Boolean('true');
+			self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-			
 			break;
 			case 'ContactSensor':
-					self.value = Boolean('true');
+			self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
 			case 'SmokeSensor':
-					self.value = Boolean('true');
+			self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				//self.value = Boolean(0);
-				//timeoutss = setTimeout(function() {
-				//self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
-				//}.bind(self), self.ondelayss);
 			break;
 			case 'LeakSensor':
-					self.value = Boolean('true');
+			self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-				//self.value = Boolean(0);
-				//timeoutls = setTimeout(function() {
-				//self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
-					//}.bind(self), self.ondelayls);
 			break;
 			}
 		}
