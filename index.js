@@ -129,11 +129,12 @@ function RfSensorAccessory(log, config) {
 		}}
 		
 		if (sensoron) {
-			self.value = Boolean('true');
+			
 			
 			
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
+					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				self.value = Boolean(0);
 					
@@ -142,9 +143,11 @@ function RfSensorAccessory(log, config) {
 				}.bind(self), self.ondelayms);
 			break;
 			case 'ContactSensor':
+					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.ContactSensorState).setValue(self.value);
 			break;
 			case 'SmokeSensor':
+					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.SmokeDetected).setValue(self.value);
 				self.value = Boolean(0);
 					
@@ -153,6 +156,7 @@ function RfSensorAccessory(log, config) {
 				}.bind(self), self.ondelayss);
 			break;
 			case 'LeakSensor':
+					self.value = Boolean('true');
 			self.service.getCharacteristic(Characteristic.LeakDetected).setValue(self.value);
 				self.value = Boolean(0);
 					
