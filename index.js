@@ -17,8 +17,7 @@ function RfSensorAccessory(log, config) {
   	this.serialNumberMAC = config['serialNumberMAC'] || "";
 	this.rfcode = config['rfcode'] || 'undefined';
 	this.rfkey = config['rfkey'] || 'undefined';
-	this.ondelay = config['ondelay'] || 10000;
-	this.ondelayms = 20000;
+	this.ondelay = config['ondelay'] || 50000;
 	this.ondelaylowbattery = config['ondelaylowbattery'] || 30000;
 	this.rfcodeon = config['rfcodeon'] || 'undefined';
 	this.rfcodeoff = config['rfcodeoff'] || 'undefined';
@@ -70,8 +69,7 @@ function RfSensorAccessory(log, config) {
 	var self = this;
 	var timeout;
 	var timeoutbat;
-	var timeoutms;
-
+	
 	
 
 
@@ -92,14 +90,14 @@ function RfSensorAccessory(log, config) {
 			switch (self.accessoryservicetype) {
 			case 'MotionSensor':
 				if (sensoractive) {
-					clearTimeout(timeoutms);
+					clearTimeout(timeout);
 					self.value = Boolean('true');
 					self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
 				}
 				self.value = Boolean(0);
-				timeoutms = setTimeout(function() {
+				timeout = setTimeout(function() {
 				self.service.getCharacteristic(Characteristic.MotionDetected).setValue(self.value);
-				}.bind(self), self.ondelayms);
+				}.bind(self), self.ondelay);
 				break;
 			case 'ContactSensor':
 				if (sensoractive) {
