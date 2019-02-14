@@ -174,10 +174,10 @@ function RfSensorAccessory(log, config) {
 			case 'MotionSensor':
 			self.value = Boolean('true');						
 			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
-			self.value = Boolean(0);
-			clearTimeout(timeoutbat);
-			timeoutbat = setTimeout(function() {
-			self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
+			//self.value = Boolean(0);
+			//clearTimeout(timeoutbat);
+			//timeoutbat = setTimeout(function() {
+			//self.service.getCharacteristic(Characteristic.StatusLowBattery).setValue(self.value);
 }.bind(self), self.ondelaylowbattery);
 			break;
 			case 'LakeSensor':
